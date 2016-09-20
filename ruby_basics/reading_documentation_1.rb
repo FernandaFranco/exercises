@@ -30,6 +30,7 @@ p b
 
 # large numbers:
 
+# this info is in the literals file.
 # you can place an underscore to improve human readability. anywhere!
 
 a = 1000
@@ -38,3 +39,38 @@ b = 1_000
 p b
 c = 10_00
 p c
+
+#symbol
+
+my_name = :fernanda
+
+p my_name
+
+# default arguments in the middle:
+
+def my_method(a, b = 2, c = 3, d)
+  p [a, b, c, d]
+end
+
+my_method(4, 5, 6)
+# => [4, 5, 3, 6]
+
+# This is very confusing. I was expecting it would raise an exception or, 
+# at least, print [4, 6, 3, 5] based on order.
+# The explanation can be found in the calling_methods file.
+
+# string class:
+
+# easy peasy. core > classes > string
+
+# right justify strings:
+
+string = 'hello'
+
+p string.rjust(10)
+
+
+# class methods and instance methods:
+
+# ::path is a class method and it's receiver is the class File. #path is a 
+# instance method and it's receiver is a new File object.
