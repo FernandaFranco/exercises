@@ -69,6 +69,19 @@ def before_midnight(time)
   delta_minutes == 1440 ? 0 : delta_minutes
 end
 
+require 'time'
+
+def after_midnight(time)
+  t = Time.parse(time)
+  delta_minutes = t.hour * 60 + t.min
+  delta_minutes % 1440
+end
+
+def before_midnight(time)
+  delta_minutes = 1440 - after_midnight(time)
+  delta_minutes == 1440 ? 0 : delta_minutes
+end
+
 p after_midnight('00:00') == 0
 p before_midnight('00:00') == 0
 p after_midnight('12:34') == 754
