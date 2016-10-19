@@ -105,19 +105,43 @@
 
 # clean up the words
 
-def cleanup(string)
-  arr = string.gsub(/[^a-z]/i, ' ')
-  arr.squeeze(' ')
-  end
+# def cleanup(string)
+#   arr = string.gsub(/[^a-z]/i, ' ')
+#   arr.squeeze(' ')
+#   end
 
-p cleanup("---what's my +*& line?") == ' what s my line '
+# p cleanup("---what's my +*& line?") == ' what s my line '
 
-def cleanup(string)
-  sel = string.chars.map do |char|
-    ('a'..'z').include?(char.downcase) ? char : ' '
+# def cleanup(string)
+#   sel = string.chars.map do |char|
+#     ('a'..'z').include?(char.downcase) ? char : ' '
+#   end
+#   sel.join.squeeze(' ')
+# end
+
+# p cleanup("---what's my +*& line?") == ' what s my line '
+
+
+# letter counter part 1
+
+def word_sizes(string)
+  array_of_lengths = string.split.map { |word| word.length }
+  result = {}
+  array_of_lengths.sort.uniq.each do |length|
+    result[length] = array_of_lengths.count(length)
   end
-  sel.join.squeeze(' ')
+  result
 end
 
-p cleanup("---what's my +*& line?") == ' what s my line '
+def word_sizes(string)
+  result = Hash.new(0)
+  string.split.each do |word|
+    result[word.length] += 1
+  end
+  result
+end
 
+p word_sizes('Four score and seven.') == { 3 => 1, 4 => 1, 5 => 1, 6 => 1 }
+p word_sizes('Hey diddle diddle, the cat and the fiddle!') == { 3 => 5, 6 => 1, 7 => 2 }
+p word_sizes("What's up doc?") == { 6 => 1, 2 => 1, 4 => 1 }
+p word_sizes('') == {}
