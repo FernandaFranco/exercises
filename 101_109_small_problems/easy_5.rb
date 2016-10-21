@@ -148,28 +148,133 @@
 
 # letter counter part 2
 
-def word_sizes(string)
-  words_array = string.chars.select do |char|
-    [('a'..'z').to_a, ' '].flatten.include?(char.downcase)
-  end
-  array_of_lengths = words_array.join.split.map { |word| word.length }
-  result = {}
-  array_of_lengths.sort.uniq.each do |length|
-    result[length] = array_of_lengths.count(length)
-  end
-  result
+# def word_sizes(string)
+#   words_array = string.chars.select do |char|
+#     [('a'..'z').to_a, ' '].flatten.include?(char.downcase)
+#   end
+#   array_of_lengths = words_array.join.split.map { |word| word.length }
+#   result = {}
+#   array_of_lengths.sort.uniq.each do |length|
+#     result[length] = array_of_lengths.count(length)
+#   end
+#   result
+# end
+
+# def word_sizes(string)
+#   result = Hash.new(0)
+#   string.split.each do |word|
+#     clean_word = word.delete('^A-Za-z')
+#     result[clean_word.length] += 1
+#   end
+#   result
+# end
+
+# p word_sizes('Four score and seven.') == { 3 => 1, 4 => 1, 5 => 2 }
+# p word_sizes('Hey diddle diddle, the cat and the fiddle!') == { 3 => 5, 6 => 3 }
+# p word_sizes("What's up doc?") == { 5 => 1, 2 => 1, 3 => 1 }
+# p word_sizes('') == {}
+
+# alphabetical numbers
+
+# ALPHABETICAL_NUMBERS = %w(zero, one, two, three, four, five, 
+#                           six, seven, eight, nine, ten, eleven, 
+#                           twelve, thirteen, fourteen, fifteen, 
+#                           sixteen, seventeen, eighteen, nineteen)
+
+# def alphabetic_number_sort(array)
+#   array.sort_by! do |number|
+#     ALPHABETICAL_NUMBERS[number]
+#   end
+# end
+
+# var = (0..19).to_a
+
+# p alphabetic_number_sort(var) == [
+#   8, 18, 11, 15, 5, 4, 14, 9, 19, 1, 7, 17,
+#   6, 16, 10, 13, 3, 12, 2, 0
+# ]
+
+# daily double
+
+# def crunch(string)
+#   crunched_string = ''
+#   chars = string.chars
+#   chars.each_with_index do |char, index|
+#     crunched_string << char if char != chars[index + 1]
+#   end
+#   p crunched_string
+# end
+
+# def crunch(string)
+#   chars = string.chars.uniq
+#   chars.each do |char|
+#     string.gsub!(/#{char}{2,}/, char)
+#   end
+#   string
+# end
+
+# # def crunch(string)
+# #   string.squeeze
+# # end
+
+# p crunch('ddaaiillyy ddoouubbllee') == 'daily double'
+# p crunch('4444abcabccba') == '4abcabcba'
+# p crunch('ggggggggggggggg') == 'g'
+# p crunch('a') == 'a'
+# p crunch('') == ''
+
+# bannerizer
+
+def print_in_box(string)
+  size = string.length
+  bond_line = "+-#{'-' * size}-+"
+  padding = "| #{' ' * size} |"
+
+  puts bond_line
+  puts padding
+
+  puts "| #{string} |"
+
+  puts padding
+  puts bond_line
 end
 
-def word_sizes(string)
-  result = Hash.new(0)
-  string.split.each do |word|
-    clean_word = word.delete('^A-Za-z')
-    result[clean_word.length] += 1
-  end
-  result
+print_in_box('To boldly go where no one has gone before.')
+print_in_box('')
+
+def print_in_box(string)
+  size = string[0..75].length
+  bond_line = "+-#{'-' * size}-+"
+  padding = "| #{' ' * size} |"
+
+  puts bond_line
+  puts padding
+
+  puts "| #{string[0..75]} |"
+
+  puts padding
+  puts bond_line
 end
 
-p word_sizes('Four score and seven.') == { 3 => 1, 4 => 1, 5 => 2 }
-p word_sizes('Hey diddle diddle, the cat and the fiddle!') == { 3 => 5, 6 => 3 }
-p word_sizes("What's up doc?") == { 5 => 1, 2 => 1, 3 => 1 }
-p word_sizes('') == {}
+def print_in_box(string)
+  size = string[0..75].length
+  bond_line = "+-#{'-' * size}-+"
+  padding = "| #{' ' * size} |"
+
+  puts bond_line
+  puts padding
+
+  puts "| #{string[0..75]} |"
+  space = (76 - string[76..-1].length)
+  space = space/2
+  if space % 2 != 0
+    puts "| " + " "*space + string[76..-1] + " "*(space+1) + " |"
+  else
+    puts "| " + " "*space + string[76..-1] + " "*space + " |"
+  end
+
+  puts padding
+  puts bond_line
+end
+
+print_in_box('To boldly go where no one has gone beforeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.')
