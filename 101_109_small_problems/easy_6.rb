@@ -52,22 +52,48 @@
 
 # 
 
-def find_fibonacci_index_by_length(digits)
-  first = 1
-  second = 1
-  index = 3
-  loop do 
-    number = first + second
-    first = second
-    second = number
-    break if second.to_s.length >= digits
-    index += 1
+# def find_fibonacci_index_by_length(digits)
+#   first = 1
+#   second = 1
+#   index = 3
+#   loop do 
+#     number = first + second
+#     first = second
+#     second = number
+#     break if second.to_s.length >= digits
+#     index += 1
+#   end
+#   index
+# end
+
+# p find_fibonacci_index_by_length(2) == 7
+# p find_fibonacci_index_by_length(10) == 45
+# p find_fibonacci_index_by_length(100) == 476
+# p find_fibonacci_index_by_length(1000) == 4782
+# p find_fibonacci_index_by_length(10000) == 47847
+
+# reverse array
+
+def reverse!(array)
+  (array.size / 2).times do |index|
+    array[index], array[-index - 1] = array[-index - 1], array[index]
   end
-  index
+  array
 end
 
-p find_fibonacci_index_by_length(2) == 7
-p find_fibonacci_index_by_length(10) == 45
-p find_fibonacci_index_by_length(100) == 476
-p find_fibonacci_index_by_length(1000) == 4782
-p find_fibonacci_index_by_length(10000) == 47847
+list = [1,2,3,4]
+p result = reverse!(list) # => [4,3,2,1]
+p list == [4, 3, 2, 1]
+p list.object_id == result.object_id
+
+list = %w(a b c d e)
+p reverse!(list) # => ["e", "d", "c", "b", "a"]
+p list == ["e", "d", "c", "b", "a"]
+
+list = ['abc']
+p reverse!(list) # => ["abc"]
+p list == ["abc"]
+
+list = []
+p reverse!([]) # => []
+p list == []
