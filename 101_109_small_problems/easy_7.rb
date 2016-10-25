@@ -167,9 +167,21 @@
 
 # the end is near but not here
 
-def penultimate(string)
-  string.split[-2]
+# def penultimate(string)
+#   string.split[-2]
+# end
+
+# p penultimate('last word') == 'last'
+# p penultimate('Launch School is great!') == 'is'
+
+def middle_word(string)
+  words_array = string.split
+  return words_array[words_array.size/2] if words_array.size.odd?
+  ''
 end
 
-p penultimate('last word') == 'last'
-p penultimate('Launch School is great!') == 'is'
+p middle_word('last fricking word') == 'fricking'
+p middle_word('Launch School sure is great!') == 'sure'
+p middle_word('word') == 'word'
+p middle_word('') == ''
+p middle_word('two words') == ''
