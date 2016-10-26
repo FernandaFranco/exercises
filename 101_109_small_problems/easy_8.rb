@@ -26,20 +26,38 @@
 
 ###
 
-def prompt(message)
-  puts ">> #{message}"
+# def prompt(message)
+#   puts ">> #{message}"
+# end
+
+# prompt "Enter a noun:"
+# noun = gets.chomp
+# prompt "Enter a verb:"
+# verb = gets.chomp
+# prompt "Enter an adjective:"
+# adjective = gets.chomp
+# prompt "Enter an adverb:"
+# adverb = gets.chomp
+
+# sentence_1 = "My #{adjective} #{noun} and I #{verb} it #{adverb}."
+# sentence_2 = "Do you #{verb} #{noun} #{adverb}? Me and my #{adjective} wife do."
+
+# prompt [sentence_1, sentence_2].sample
+
+###
+
+def substrings_at_start(string)
+  substring = ''
+  result = []
+  string.each_char do |char|
+    substring += char
+    result << substring
+  end
+  result
 end
 
-prompt "Enter a noun:"
-noun = gets.chomp
-prompt "Enter a verb:"
-verb = gets.chomp
-prompt "Enter an adjective:"
-adjective = gets.chomp
-prompt "Enter an adverb:"
-adverb = gets.chomp
+p substrings_at_start('abc') == ['a', 'ab', 'abc']
+p substrings_at_start('a') == ['a']
+p substrings_at_start('xyzzy') == ['x', 'xy', 'xyz', 'xyzz', 'xyzzy']
 
-sentence_1 = "My #{adjective} #{noun} and I #{verb} it #{adverb}."
-sentence_2 = "Do you #{verb} #{noun} #{adverb}? Me and my #{adjective} wife do."
 
-prompt [sentence_1, sentence_2].sample
