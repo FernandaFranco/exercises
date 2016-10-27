@@ -46,18 +46,79 @@
 
 ###
 
-def substrings_at_start(string)
-  substring = ''
+# def substrings_at_start(string)
+#   substring = ''
+#   result = []
+#   string.each_char do |char|
+#     substring += char
+#     result << substring
+#   end
+#   result
+# end
+
+# p substrings_at_start('abc') == ['a', 'ab', 'abc']
+# p substrings_at_start('a') == ['a']
+# p substrings_at_start('xyzzy') == ['x', 'xy', 'xyz', 'xyzz', 'xyzzy']
+
+# def substrings(string)
+#   result = []
+#   string.chars.each_index do |index|
+#     result << substrings_at_start(string[index..-1])
+#   end
+#   result.flatten
+# end
+
+# p substrings('abcde') == [
+#   'a', 'ab', 'abc', 'abcd', 'abcde', 
+#   'b', 'bc', 'bcd', 'bcde',
+#   'c', 'cd', 'cde',
+#   'd', 'de',
+#   'e'
+# ]
+
+# def palindromes(string)
+#   substrings(string).select do |substring|
+#     substring == substring.reverse && substring.size > 1
+#   end
+# end
+  
+
+# p palindromes('abcd') == []
+# p palindromes('madam') == ['madam', 'ada']
+# p palindromes('hello-madam-did-madam-goodbye') == [
+#   'll', '-madam-', '-madam-did-madam-', 'madam', 'madam-did-madam', 'ada',
+#   'adam-did-mada', 'dam-did-mad', 'am-did-ma', 'm-did-m', '-did-', 'did',
+#   '-madam-', 'madam', 'ada', 'oo'
+# ]
+# p palindromes('knitting cassettes') == [
+#   'nittin', 'itti', 'tt', 'ss', 'settes', 'ette', 'tt'
+# ]
+
+# def palindromes(string)
+#   all_substrings = substrings(string.downcase.delete('^a-z'))
+#   all_substrings.select do |substring|
+#     substring == substring.reverse && substring.size > 1
+#   end
+# end
+
+# p palindromes('hello-Madam-did-madam-goodbye')
+
+###
+
+def fizzbuzz(starting_number, ending_number)
   result = []
-  string.each_char do |char|
-    substring += char
-    result << substring
+  (starting_number..ending_number).each do |number|
+    if number % 3 == 0 && number % 5 == 0
+      result << 'fizzbuzz'
+    elsif number % 3 == 0
+      result << 'fizz'
+    elsif number % 5 == 0
+      result << 'buzz'
+    else
+      result << number
+    end
   end
-  result
+  puts result.join(', ')
 end
 
-p substrings_at_start('abc') == ['a', 'ab', 'abc']
-p substrings_at_start('a') == ['a']
-p substrings_at_start('xyzzy') == ['x', 'xy', 'xyz', 'xyzz', 'xyzzy']
-
-
+fizzbuzz(1, 15) # -> 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz
