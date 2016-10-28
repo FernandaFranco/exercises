@@ -1,0 +1,2 @@
+def method(argument)
+end
