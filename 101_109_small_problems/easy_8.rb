@@ -105,20 +105,85 @@
 
 ###
 
-def fizzbuzz(starting_number, ending_number)
-  result = []
-  (starting_number..ending_number).each do |number|
-    if number % 3 == 0 && number % 5 == 0
-      result << 'fizzbuzz'
-    elsif number % 3 == 0
-      result << 'fizz'
-    elsif number % 5 == 0
-      result << 'buzz'
-    else
-      result << number
-    end
-  end
-  puts result.join(', ')
+# def fizzbuzz(starting_number, ending_number)
+#   result = []
+#   (starting_number..ending_number).each do |number|
+#     if number % 3 == 0 && number % 5 == 0
+#       result << 'fizzbuzz'
+#     elsif number % 3 == 0
+#       result << 'fizz'
+#     elsif number % 5 == 0
+#       result << 'buzz'
+#     else
+#       result << number
+#     end
+#   end
+#   puts result.join(', ')
+# end
+
+# fizzbuzz(1, 15) # -> 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz
+
+### 
+
+# def repeater(string)
+#   result = []
+#   string.chars.each do |char|
+#     result << char*2
+#   end
+#   result.join
+# end
+
+# def repeater(string)
+#   result = ''
+#   string.each_char do |char|
+#     result << char*2
+#   end
+#   result
+# end
+
+# p repeater('Hello') == "HHeelllloo"
+# p repeater("Good job!") == "GGoooodd  jjoobb!!"
+# p repeater('') == ''
+
+###
+# CONSONANTS = %w(b c d f g h j k l m n p q r s t v w x y z)
+
+# def double_consonants(string)
+#   result = ''
+#   string.each_char do |char|
+#     result << (CONSONANTS.include?(char.downcase) ? char*2 : char)
+#   end
+#   result
+# end
+
+# p double_consonants('String') == "SSttrrinngg"
+# p double_consonants("Hello-World!") == "HHellllo-WWorrlldd!"
+# p double_consonants("July 4th") == "JJullyy 4tthh"
+# p double_consonants('') == ""
+
+# def reversed_number(integer)
+#   integer.to_s.reverse.to_i
+# end
+
+# def reversed_number(integer)
+#   integer.to_s.chars.reverse.join.to_i
+# end
+  
+# p reversed_number(12345) == 54321
+# p reversed_number(12213) == 31221
+# p reversed_number(456) == 654
+# p reversed_number(12000) == 21 # Note that zeros get dropped!
+# p reversed_number(1) == 1
+
+###
+
+def center_of(string)
+  center_index = string.length/2
+  string.length.odd? ? string[center_index] : string[(center_index - 1)..center_index]
 end
 
-fizzbuzz(1, 15) # -> 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz
+p center_of('I love ruby') == 'e'
+p center_of('Launch School') == ' '
+p center_of('Launch') == 'un'
+p center_of('Launchschool') == 'hs'
+p center_of('x') == 'x'
