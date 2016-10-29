@@ -87,16 +87,58 @@
 
 ###
 
-NUMBER_OF_SWITCHES = 1000
-SWITCHES = [false] * NUMBER_OF_SWITCHES
+# NUMBER_OF_SWITCHES = 1000
+# switches = [false] * NUMBER_OF_SWITCHES
   
-1.upto(NUMBER_OF_SWITCHES) do |n| # round n 
-  SWITCHES.each_index do |index| # individual switch at round n
-    SWITCHES[index] = !SWITCHES[index] if (index + 1) % n == 0
+# 1.upto(NUMBER_OF_SWITCHES) do |n| # round n 
+#   switches.each_index do |index| # value of individual switch at round n
+#     switches[index] = !switches[index] if (index + 1) % n == 0
+#   end
+# end
+
+# lights_on = switches.map.with_index { |val, ind| val == true ? (ind + 1) : val }
+# p result = lights_on.reject { |switch| switch == false }
+# p result.size
+
+# NUMBER_OF_SWITCHES = 1000
+# switches = (1..NUMBER_OF_SWITCHES).each_with_object({}) { |position, hash| hash[position] = false}
+  
+# 1.upto(NUMBER_OF_SWITCHES) do |n| # round n 
+#   switches.each_key do |key| # value of individual switch at round n
+#     switches[key] = !switches[key] if key % n == 0
+#   end
+# end
+
+# p lights_on = switches.keys.select { |key| switches[key] == true }
+# p lights_on.size
+
+###
+
+# def diamond(odd_integer)
+#   count = -1
+#   while count < odd_integer
+#     count += 2
+#     puts " " * ((odd_integer - count) / 2) + "*" * count + " " * ((odd_integer - count) / 2)
+#   end
+#   while count > 1
+#     count -= 2
+#     puts " " * ((odd_integer - count) / 2) + "*" * count + " " * ((odd_integer - count) / 2)
+#   end
+# end
+
+def diamond(odd_integer)
+  count = 1
+  puts ("*" * count).center(odd_integer)
+  while count < odd_integer
+    count += 2
+    puts ("*" + " " * (count-2) + "*").center(odd_integer)
   end
+  while count > 3
+    count -= 2
+    puts ("*" + " " * (count-2) + "*").center(odd_integer)
+  end
+  count = 1
+  puts ("*" * count).center(odd_integer)
 end
 
-p lights_on = SWITCHES.map.with_index { |v, i| v == true ? i+1 : v }
-p lights_on.select { |switch| switch != false }
-
-  
+diamond(51)
