@@ -126,19 +126,163 @@
 #   end
 # end
 
-def diamond(odd_integer)
-  count = 1
-  puts ("*" * count).center(odd_integer)
-  while count < odd_integer
-    count += 2
-    puts ("*" + " " * (count-2) + "*").center(odd_integer)
+# def diamond(odd_integer)
+#   count = 1
+#   puts ("*" * count).center(odd_integer)
+#   while count < odd_integer
+#     count += 2
+#     puts ("*" + " " * (count-2) + "*").center(odd_integer)
+#   end
+#   while count > 3
+#     count -= 2
+#     puts ("*" + " " * (count-2) + "*").center(odd_integer)
+#   end
+#   count = 1
+#   puts ("*" * count).center(odd_integer)
+# end
+
+# diamond(51)
+
+# def minilang(commands)
+#   register = 0
+#   stack = []
+#   commands.split.each do |command|
+#     case 
+#     when command == command.to_i.to_s then register = command.to_i
+#     when command == 'PUSH'            then stack << register
+#     when command == 'PRINT'           then puts register
+#     when stack.empty?                 then return "ERROR: Empty stack."
+#     when command == 'ADD'             then register += stack.pop
+#     when command == 'SUB'             then register -= stack.pop
+#     when command == 'MULT'            then register *= stack.pop
+#     when command == 'DIV'             then register /= stack.pop
+#     when command == 'MOD'             then register %= stack.pop
+#     when command == 'POP'             then register = stack.pop
+#     else                              return "ERROR: #{command} is invalid."
+#     end
+#   end
+#   nil
+# end
+
+# minilang('PRINT')
+# minilang('5 PUSH 3 MULT PRINT')
+# minilang('5 PRINT PUSH 3 PRINT ADD PRINT')
+# minilang('5 PUSH POP PRINT')
+# minilang('3 PUSH 4 PUSH 5 PUSH PRINT ADD PRINT POP PRINT ADD PRINT')
+# minilang('3 PUSH PUSH 7 DIV MULT PRINT ')
+# minilang('4 PUSH PUSH 7 MOD MULT PRINT ')
+# minilang('-3 PUSH 5 SUB PRINT 4 SUB')
+# minilang('6 PUSH')
+
+# p (3 + (4 * 5) - 7)
+# numerator = "7 PUSH 5 PUSH 4 MULT PUSH 3 ADD SUB" 
+# minilang(numerator + " PRINT")
+
+# puts '---'
+
+# p (5 % 3)
+# denominator = "3 PUSH 5 MOD PUSH" 
+# minilang(denominator + " PRINT")
+
+# puts '---'
+
+# p (3 + (4 * 5) - 7) /(5 % 3)
+# minilang("#{denominator} #{numerator} DIV PRINT")
+
+# WORDS = %w(zero one two three four five six seven eight nine)
+
+# def word_to_digit(string)
+#   number = '('
+#   result = []
+#   string.split.each do |word|
+#     text = word.downcase.delete('^a-z')
+#     if WORDS.include?(text)
+#       number << word.gsub(text, WORDS.index(text).to_s)
+#       number << ') ' if number.length == 4
+#       number << '-' if number.length == 9
+#       result << number if number.length >= 14
+#     else
+#       result << word
+#     end
+#   end
+#   result.join(' ')
+# end
+
+# p word_to_digit('Please call me at five five five one two three four five six seven. Thanks.') #== 
+# 'Please call me at 5 5 5 1 2 3 4. Thanks.'
+
+# p word_to_digit('Call me at five five five one two three four five six seven. By 2 30 pm.')
+
+# def fibonacci(number)
+#   return 1 if [1,2].include?(number)
+#   fibonacci(number - 1) + fibonacci(number - 2)
+# end
+
+# p fibonacci(1) == 1
+# p fibonacci(2) == 1
+# p fibonacci(3) == 2
+# p fibonacci(4) == 3
+# p fibonacci(5) == 5
+# p fibonacci(12) == 144
+# p fibonacci(20) == 6765
+# # p fibonacci(50)
+
+# def fibonacci_tail(nth, acc1, acc2)
+#   if nth == 1
+#     acc1
+#   elsif nth == 2
+#     acc2
+#   else
+#     fibonacci_tail(nth - 1, acc2, acc2 + acc1)
+#   end
+# end
+
+# def fibonacci(nth)
+#   fibonacci_tail(nth, 1, 1)
+# end
+
+# p fibonacci(50)
+
+def fibonacci(number)
+  prev = 1
+  curr = 1
+  (3..number).each do |position|
+    prev, curr = curr, (prev + curr)
   end
-  while count > 3
-    count -= 2
-    puts ("*" + " " * (count-2) + "*").center(odd_integer)
-  end
-  count = 1
-  puts ("*" * count).center(odd_integer)
+  curr
 end
 
-diamond(51)
+p fibonacci(1) == 1
+p fibonacci(2) == 1
+p fibonacci(3) == 2
+p fibonacci(4) == 3
+p fibonacci(5) == 5
+p fibonacci(12) == 144
+p fibonacci(20) == 6765
+p fibonacci(50)
+
+def fibonacci_last(number)
+  fibonacci(number).to_s[-1].to_i
+end
+
+def fibonacci_last(nth)
+  last_2 = [1, 1]
+  3.upto(nth) do
+    last_2 = [last_2.last, (last_2.first + last_2.last) % 10]
+  end
+
+  last_2.last
+end
+
+def last_digit(nth)
+ endings = 1.upto(60).map { |num| fibonacci_last(num) }
+ endings[(nth % 60) - 1]
+end
+
+p last_digit(15)        # -> 0  (the 15th Fibonacci number is 610)
+p last_digit(20)        # -> 5 (the 20th Fibonacci number is 6765)
+p last_digit(100)       # -> 5 (the 100th Fibonacci number is 354224848179261915075)
+p last_digit(100_001)   # -> 1 (this is a 20899 digit number)
+p last_digit(1_000_007) # -> 3 (this is a 208989 digit number)
+p last_digit(123456789) # -> 4
+p last_digit(123_456_789_987_745) # -> 5
