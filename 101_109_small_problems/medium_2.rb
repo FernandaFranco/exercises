@@ -25,3 +25,34 @@
 # longest_word('four_score.txt')
 # longest_word('frankenstein.txt')
 
+# ALPHABET = ('A'..'Z').to_a
+          
+# def block_word?(string)
+#   unavailable_letters = []
+#   string.upcase.chars.each do |char|
+#     return false if unavailable_letters.flatten.include?(char)
+#     if ALPHABET.index(char) < 13
+#       block = [char, ALPHABET[ALPHABET.index(char) + 13]]
+#     else
+#       block = [ALPHABET[ALPHABET.index(char) - 13], char]
+#     end
+#     p unavailable_letters << block
+#   end
+#   true
+# end
+
+# p block_word?('BATCH') == true
+# p block_word?('BUTCH') == false
+# p block_word?('jest') == true
+
+def letter_percentages(string)
+  {
+    lowercase: (string.count('a-z')/string.size.to_f) * 100,
+    uppercase: (string.count('A-Z')/string.size.to_f) * 100,
+    neither: (string.count('^a-zA-Z')/string.size.to_f) * 100
+  }
+end
+
+p letter_percentages('abCdef 123') == { lowercase: 50, uppercase: 10, neither: 40 }
+p letter_percentages('AbCd +Ef') == { lowercase: 37.5, uppercase: 37.5, neither: 25 }
+p letter_percentages('123') == { lowercase: 0, uppercase: 0, neither: 100 }
