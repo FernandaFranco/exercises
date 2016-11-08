@@ -45,14 +45,33 @@
 # p block_word?('BUTCH') == false
 # p block_word?('jest') == true
 
-def letter_percentages(string)
-  {
-    lowercase: (string.count('a-z')/string.size.to_f) * 100,
-    uppercase: (string.count('A-Z')/string.size.to_f) * 100,
-    neither: (string.count('^a-zA-Z')/string.size.to_f) * 100
-  }
+# def letter_percentages(string)
+#   {
+#     lowercase: (string.count('a-z')/string.size.to_f) * 100,
+#     uppercase: (string.count('A-Z')/string.size.to_f) * 100,
+#     neither: (string.count('^a-zA-Z')/string.size.to_f) * 100
+#   }
+# end
+
+# p letter_percentages('abCdef 123') == { lowercase: 50, uppercase: 10, neither: 40 }
+# p letter_percentages('AbCd +Ef') == { lowercase: 37.5, uppercase: 37.5, neither: 25 }
+# p letter_percentages('123') == { lowercase: 0, uppercase: 0, neither: 100 }
+
+def balanced?(string)
+  open_parenthesis = 0
+  string.chars.each do |char|
+    open_parenthesis += 1 if char == '('
+    open_parenthesis -= 1 if char == ')'
+    return false if open_parenthesis < 0
+  end
+  open_parenthesis == 0 ? true : false
 end
 
-p letter_percentages('abCdef 123') == { lowercase: 50, uppercase: 10, neither: 40 }
-p letter_percentages('AbCd +Ef') == { lowercase: 37.5, uppercase: 37.5, neither: 25 }
-p letter_percentages('123') == { lowercase: 0, uppercase: 0, neither: 100 }
+p balanced?('What (is) this?') == true
+p balanced?('What is) this?') == false
+p balanced?('What (is this?') == false
+p balanced?('((What) (is this))?') == true
+p balanced?('((What)) (is this))?') == false
+p balanced?('Hey!') == true
+p balanced?(')Hey!(') == false
+p balanced?('What ((is))) up(') == false
