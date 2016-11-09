@@ -57,21 +57,40 @@
 # p letter_percentages('AbCd +Ef') == { lowercase: 37.5, uppercase: 37.5, neither: 25 }
 # p letter_percentages('123') == { lowercase: 0, uppercase: 0, neither: 100 }
 
+# def balanced?(string)
+#   open_parenthesis = 0
+#   string.chars.each do |char|
+#     open_parenthesis += 1 if char == '('
+#     open_parenthesis -= 1 if char == ')'
+#     return false if open_parenthesis < 0
+#   end
+#   open_parenthesis == 0 ? true : false
+# end
+
+# p balanced?('What (is) this?') == true
+# p balanced?('What is) this?') == false
+# p balanced?('What (is this?') == false
+# p balanced?('((What) (is this))?') == true
+# p balanced?('((What)) (is this))?') == false
+# p balanced?('Hey!') == true
+# p balanced?(')Hey!(') == false
+# p balanced?('What ((is))) up(') == false
+
 def balanced?(string)
-  open_parenthesis = 0
-  string.chars.each do |char|
-    open_parenthesis += 1 if char == '('
-    open_parenthesis -= 1 if char == ')'
-    return false if open_parenthesis < 0
+  pairs = %W(() [] {})
+  pairs.each do |pair|
+    open_pair = 0
+    string.chars.each do |char|
+      open_pair += 1 if char == pair[0]
+      open_pair -= 1 if char == pair[1]
+      break if open_pair < 0
+    end
+    return false unless open_pair.zero?
   end
-  open_parenthesis == 0 ? true : false
+  return false unless string.count("\"").even?
+  return false unless string.count("'").even?
+  true
 end
 
-p balanced?('What (is) this?') == true
-p balanced?('What is) this?') == false
-p balanced?('What (is this?') == false
-p balanced?('((What) (is this))?') == true
-p balanced?('((What)) (is this))?') == false
-p balanced?('Hey!') == true
-p balanced?(')Hey!(') == false
-p balanced?('What ((is))) up(') == false
+
+p balanced?("He said '(Hilary) is a [nasty] woman.'")
