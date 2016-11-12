@@ -194,30 +194,46 @@
 
 # p featured(9_999_999_999) # -> There is no possible number that fulfills those requirements
 
-def bubble_sort!(array)
-end_of_array = array.length
-  loop do
-    change = false
-    (1...end_of_array).each do |index|
-      if array[index - 1] > array[index]
-        array[index - 1], array[index] = array[index], array[index - 1]
-        change = true
-      end
-    end
-    break if change == false
-    end_of_array -= 1
+# def bubble_sort!(array)
+# end_of_array = array.length
+#   loop do
+#     change = false
+#     (1...end_of_array).each do |index|
+#       if array[index - 1] > array[index]
+#         array[index - 1], array[index] = array[index], array[index - 1]
+#         change = true
+#       end
+#     end
+#     break if change == false
+#     end_of_array -= 1
+#   end
+#   array
+# end
+
+# array = [5, 3]
+# p bubble_sort!(array)
+# p array == [3, 5]
+
+# array = [6, 2, 7, 1, 4]
+# p bubble_sort!(array)
+# p array == [1, 2, 4, 6, 7]
+
+# array = %w(Sue Pete Alice Tyler Rachel Kim Bonnie)
+# p bubble_sort!(array)
+# p array == %w(Alice Bonnie Kim Pete Rachel Sue Tyler)
+
+def sum_square_difference(number)
+  plain_sum = 0
+  sum_of_squares = 0
+  1.upto(number) do |n|
+    plain_sum += n
+    sum_of_squares += n**2
   end
-  array
+  plain_sum**2 - sum_of_squares
 end
 
-array = [5, 3]
-p bubble_sort!(array)
-p array == [3, 5]
-
-array = [6, 2, 7, 1, 4]
-p bubble_sort!(array)
-p array == [1, 2, 4, 6, 7]
-
-array = %w(Sue Pete Alice Tyler Rachel Kim Bonnie)
-p bubble_sort!(array)
-p array == %w(Alice Bonnie Kim Pete Rachel Sue Tyler)
+p sum_square_difference(3) == 22
+   # -> (1 + 2 + 3)**2 - (1**2 + 2**2 + 3**2)
+p sum_square_difference(10) == 2640
+p sum_square_difference(1) == 0
+p sum_square_difference(100) == 25164150
