@@ -76,21 +76,148 @@
 # p balanced?(')Hey!(') == false
 # p balanced?('What ((is))) up(') == false
 
-def balanced?(string)
-  pairs = %W(() [] {})
-  pairs.each do |pair|
-    open_pair = 0
-    string.chars.each do |char|
-      open_pair += 1 if char == pair[0]
-      open_pair -= 1 if char == pair[1]
-      break if open_pair < 0
+# def balanced?(string)
+#   pairs = %W(() [] {})
+#   pairs.each do |pair|
+#     open_pair = 0
+#     string.chars.each do |char|
+#       open_pair += 1 if char == pair[0]
+#       open_pair -= 1 if char == pair[1]
+#       break if open_pair < 0
+#     end
+#     return false unless open_pair.zero?
+#   end
+#   return false unless string.count("\"").even?
+#   return false unless string.count("'").even?
+#   true
+# end
+
+
+# p balanced?("He said '(Hilary) is a [nasty] woman.'")
+
+# def triangle(side_1, side_2, side_3)
+#   sorted_sides = [side_1, side_2, side_3].sort.reverse
+#   case
+#   when sorted_sides.include?(0), sorted_sides[0] > (sorted_sides[1] + sorted_sides[2])
+#     :invalid
+#   when side_1 == side_2 && side_2 == side_3
+#     :equilateral
+#   when side_1 == side_2 || side_1 == side_3 || side_2 == side_3 
+#     :isosceles
+#   else
+#     :scalene
+#   end
+# end
+
+# p triangle(3, 3, 3) #== :equilateral
+# p triangle(3, 3, 1.5) #== :isosceles
+# p triangle(3, 4, 5) #== :scalene
+# p triangle(0, 3, 3) #== :invalid
+# p triangle(3, 1, 1) #== :invalid
+
+# def triangle(angle_1, angle_2, angle_3)
+#   sorted_angles = [angle_1, angle_2, angle_3].sort.reverse
+#   case
+#   when sorted_angles.include?(0), sorted_angles.reduce(:+) != 180
+#     :invalid
+#   when sorted_angles[0] == 90
+#     :right
+#   when sorted_angles.all? { |angle| angle < 90 }
+#     :acute
+#   else
+#     :obtuse
+#   end
+# end
+
+# p triangle(60, 70, 50) #== :acute
+# p triangle(30, 90, 60) #== :right
+# p triangle(120, 50, 10) #== :obtuse
+# p triangle(0, 90, 90) #== :invalid
+# p triangle(50, 50, 50) #== :invalid
+
+# def friday_13th?(year)
+#   fridays_13th = 0
+#   (1..12).each do |month|
+#     date = Time.new(year, month, 13)
+#     fridays_13th += 1 if date.friday?
+#   end
+#   fridays_13th
+# end
+
+# p friday_13th?(2015) == 3
+# p friday_13th?(1986) == 1
+
+# require 'date'
+
+# def lucky_days(year)
+#   week_days = {}
+#   (1..12).each do |month|
+#     date = Time.new(year, month, 7)
+#     week_days[Date::ABBR_MONTHNAMES[month]] = Date::DAYNAMES[date.wday]
+#   end
+#   week_days
+# end
+
+# p lucky_days(2016)
+
+# def second_to_last_day(year)
+#   week_days = {}
+#   (1..12).each do |month|
+#     date = Date.new(year, month, -2)
+#     week_days[Date::ABBR_MONTHNAMES[month]] = Date::DAYNAMES[date.wday]
+#   end
+#   week_days
+# end
+
+# p second_to_last_day(2016)
+
+# def featured(number)
+#   multiplier = (number/7.to_f).floor + 1
+#   multiplier = multiplier + 1 if multiplier.even?
+#   potential_featured = 0
+#   loop do
+#     potential_featured = 7 * multiplier
+#     break if potential_featured.to_s.chars == potential_featured.to_s.chars.uniq
+#     return "There is no possible number that fulfills those requirements" if potential_featured > 9_876_543_210
+#     multiplier += 2
+#   end
+#   potential_featured
+# end
+
+# p featured(12) #== 21
+# p featured(20) #== 21
+# p featured(21) #== 35
+# p featured(997) #== 1029
+# p featured(1029) #== 1043
+# p featured(999_999) #== 1_023_547
+# p featured(999_999_987) #== 1_023_456_987
+
+# p featured(9_999_999_999) # -> There is no possible number that fulfills those requirements
+
+def bubble_sort!(array)
+end_of_array = array.length
+  loop do
+    change = false
+    (1...end_of_array).each do |index|
+      if array[index - 1] > array[index]
+        array[index - 1], array[index] = array[index], array[index - 1]
+        change = true
+      end
     end
-    return false unless open_pair.zero?
+    break if change == false
+    end_of_array -= 1
   end
-  return false unless string.count("\"").even?
-  return false unless string.count("'").even?
-  true
+  array
 end
 
+array = [5, 3]
+p bubble_sort!(array)
+p array == [3, 5]
 
-p balanced?("He said '(Hilary) is a [nasty] woman.'")
+array = [6, 2, 7, 1, 4]
+p bubble_sort!(array)
+p array == [1, 2, 4, 6, 7]
+
+array = %w(Sue Pete Alice Tyler Rachel Kim Bonnie)
+p bubble_sort!(array)
+p array == %w(Alice Bonnie Kim Pete Rachel Sue Tyler)
