@@ -255,11 +255,32 @@
 #   new_array.uniq
 # end
 
-def permutations(array)
-  return [array] if array.size == 1
+# def permutations(array)
+#   return [array] if array.size == 1
   
-  [array[0]]
-  permutations(array)
+#   result = []
+#   array.each_index do |index|
+#     sub_permutations = permutations(array[0...index] + array[(index+1)..-1])
+#     sub_permutations.each do |permutation|
+#       result << [array[index]] + permutation
+#     end
+#   end
+#   result
+# end
+
+def permutations(array)
+  n = array.size
+  return [array] if n == 1
+  
+  (0...n-1).each do |i|
+    permutations(array[0...-1])
+    if n.even?
+      array[i], array[n-1] = array[n-1], array[i]
+    else
+      array[0], array[n-1] = array[n-1], array[0]
+    end
+  end
+  permutations(array[0...-1])
 end
 
 
