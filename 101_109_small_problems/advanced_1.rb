@@ -268,19 +268,26 @@
 #   result
 # end
 
-def permutations(array)
-  n = array.size
-  return [array] if n == 1
-  
-  (0...n-1).each do |i|
-    permutations(array[0...-1])
-    if n.even?
-      array[i], array[n-1] = array[n-1], array[i]
-    else
-      array[0], array[n-1] = array[n-1], array[0]
+### heap's algorithm
+
+def permutations(array, n = array.size, result_array = [])
+  if n == 1
+    result_array << array.clone
+  else
+    (0...n-1).each do |i|
+      permutations(array, n-1, result_array)
+      
+      if n.even?
+        array[i], array[n-1] = array[n-1], array[i]
+      else
+        array[0], array[n-1] = array[n-1], array[0]
+      end
     end
+    
+    permutations(array, n-1, result_array)
   end
-  permutations(array[0...-1])
+  
+  result_array
 end
 
 
