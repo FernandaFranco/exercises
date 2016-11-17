@@ -270,34 +270,74 @@
 
 ### heap's algorithm
 
-def permutations(array, n = array.size, result_array = [])
-  if n == 1
-    result_array << array.clone
-  else
-    (0...n-1).each do |i|
-      permutations(array, n-1, result_array)
+# def permutations(array, n = array.size, result_array = [])
+#   if n == 1
+#     result_array << array.clone
+#   else
+#     (0...n-1).each do |i|
+#       permutations(array, n-1, result_array)
       
-      if n.even?
-        array[i], array[n-1] = array[n-1], array[i]
-      else
-        array[0], array[n-1] = array[n-1], array[0]
-      end
-    end
+#       if n.even?
+#         array[i], array[n-1] = array[n-1], array[i]
+#       else
+#         array[0], array[n-1] = array[n-1], array[0]
+#       end
+#     end
     
-    permutations(array, n-1, result_array)
+#     permutations(array, n-1, result_array)
+#   end
+  
+#   result_array
+# end
+
+
+# p permutations([2])
+# # -> [[2]]
+
+# p permutations([1, 2])
+# # -> [[1, 2], [2, 1]]
+
+# p permutations([1, 2, 3])
+# # -> [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+
+# p permutations([1, 2, 3, 4])
+
+# def my_method(array)
+#   if array.empty?
+#     []
+#   elsif array.size != 1
+#     array.map do |value|
+#       value * value
+#     end
+#   else
+#     [7 * array.first]
+#   end
+# end
+
+# p my_method([])
+# p my_method([3])
+# p my_method([3, 4])
+# p my_method([5, 6, 7])
+
+def merge(array_1, array_2)
+  result = []
+  
+  return array_2 if array_1.empty?
+  return array_1 if array_2.empty?
+  
+  if array_1[0] < array_2[0]
+    result << array_1[0]
+  else
+    result << array_2[0]
   end
   
-  result_array
+  min = [array_1.size, array_2.size].min
+  
+ 
+  [result, min]
 end
 
-
-p permutations([2])
-# -> [[2]]
-
-p permutations([1, 2])
-# -> [[1, 2], [2, 1]]
-
-p permutations([1, 2, 3])
-# -> [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
-
-p permutations([1, 2, 3, 4])
+p merge([1, 5, 9], [2, 6, 8]) #== [1, 2, 5, 6, 8, 9]
+p merge([1, 1, 3], [2, 2]) #== [1, 1, 2, 2, 3]
+p merge([], [1, 4, 5]) #== [1, 4, 5]
+p merge([1, 4, 5], []) #== [1, 4, 5]
