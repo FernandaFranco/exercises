@@ -322,22 +322,119 @@
 def merge(array_1, array_2)
   result = []
   
-  return array_2 if array_1.empty?
-  return array_1 if array_2.empty?
+  index_1 = 0
+  index_2 = 0
   
-  if array_1[0] < array_2[0]
-    result << array_1[0]
-  else
-    result << array_2[0]
+  until array_1[index_1] == nil && array_2[index_2] == nil
+    case
+    when array_1[index_1] == nil
+      result << array_2[index_2]
+      index_2 += 1
+    when array_2[index_2] == nil
+      result << array_1[index_1]
+      index_1 += 1
+    when array_1[index_1] < array_2[index_2]
+      result << array_1[index_1]
+      index_1 += 1
+    when array_2[index_2] < array_1[index_1]
+      result << array_2[index_2]
+      index_2 += 1
+    end
   end
-  
-  min = [array_1.size, array_2.size].min
-  
  
-  [result, min]
+  result
 end
 
-p merge([1, 5, 9], [2, 6, 8]) #== [1, 2, 5, 6, 8, 9]
-p merge([1, 1, 3], [2, 2]) #== [1, 1, 2, 2, 3]
-p merge([], [1, 4, 5]) #== [1, 4, 5]
-p merge([1, 4, 5], []) #== [1, 4, 5]
+# p merge([1, 5, 9], [2, 6, 8]) == [1, 2, 5, 6, 8, 9]
+# p merge([1, 1, 3], [2, 2]) == [1, 1, 2, 2, 3]
+# p merge([], [1, 4, 5]) == [1, 4, 5]
+# p merge([1, 4, 5], []) == [1, 4, 5]
+
+# def merge_sort(array)
+#   nested_array = array.map do |value|
+#     [value]
+#   end
+
+#   result = []
+#   until result.size == 1
+#     result = []
+    
+#     index = 0
+#     until nested_array[index + 1] == nil
+#       result << merge(nested_array[index], nested_array[index + 1])
+#       index += 2
+#     end
+    
+#     result << nested_array[index] if nested_array[index] != nil
+#     nested_array = result
+#   end
+  
+  
+#   result.flatten
+# end
+
+# def merge_sort(array)
+#   return array if array.size == 1
+  
+#   subarray_1 = array[0...(array.size / 2)]
+#   subarray_2 = array[(array.size / 2)..-1]
+  
+#   subarray_1 = merge_sort(subarray_1)
+#   subarray_2 = merge_sort(subarray_2)
+  
+#   merge(subarray_1, subarray_2)
+# end
+
+# p merge_sort([9, 5, 7, 1]) == [1, 5, 7, 9]
+# p merge_sort([5, 3]) == [3, 5]
+# p merge_sort([6, 2, 7, 1, 4]) == [1, 2, 4, 6, 7]
+# p merge_sort(%w(Sue Pete Alice Tyler Rachel Kim Bonnie)) == %w(Alice Bonnie Kim Pete Rachel Sue Tyler)
+# p merge_sort([7, 3, 9, 15, 23, 1, 6, 51, 22, 37, 54, 43, 5, 25, 35, 18, 46]) == [1, 3, 5, 6, 7, 9, 15, 18, 22, 23, 25, 35, 37, 43, 46, 51, 54]
+
+
+# takes a Rational number as an argument, and returns an Array of the denominators that are part of an Egyptian Fraction representation of the number
+
+def egyptian(rational)
+  number = rational
+  denominator = 1
+  array= []
+  
+  loop do
+    if (number - (1 / denominator.to_f)).round(10) < 0
+      denominator += 1
+      next
+    end
+    number -= (1 / denominator.to_f)
+    array << denominator
+    
+    denominator += 1
+    
+    break if number.round(10) == 0
+  end
+  
+  array
+end
+
+p egyptian(Rational(2, 1))    # -> [1, 2, 3, 6]
+p egyptian(Rational(137, 60)) # -> [1, 2, 3, 4, 5]
+p egyptian(Rational(3, 1))    # -> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 230, 57960]
+
+# takes an Array of numbers in the same format, and calculates the resulting Rational number. You will need to use the Rational class provided by Ruby.
+
+# def unegyptian(egyptian)
+#   rat = 0 
+#   p egyptian
+#   egyptian.each do |den|
+#     rat += (1/den).to_f
+#   end
+#   rat.round(10)
+# end
+
+# p unegyptian(egyptian(Rational(1, 2))) #== Rational(1, 2)
+# p unegyptian(egyptian(Rational(3, 4))) #== Rational(3, 4)
+# p unegyptian(egyptian(Rational(39, 20))) #== Rational(39, 20)
+# p unegyptian(egyptian(Rational(127, 130))) #== Rational(127, 130)
+# p unegyptian(egyptian(Rational(5, 7))) #== Rational(5, 7)
+# p unegyptian(egyptian(Rational(1, 1))) #== Rational(1, 1)
+# p unegyptian(egyptian(Rational(2, 1))) #== Rational(2, 1)
+# p unegyptian(egyptian(Rational(3, 1))) #== Rational(3, 1)
