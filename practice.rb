@@ -126,14 +126,123 @@
 # p running_total([3]) == [3]
 # p running_total([]) == []
  
-CHARS = %w(0 1 2 3 4 5 6 7 8 9)
+# CHARS = %w(0 1 2 3 4 5 6 7 8 9)
  
- def string_to_integer(string)
-   string.each_char do |char|
-     CHARS.index(char)
-   end
- end
+#  def string_to_integer(string)
+#    string.each_char do |char|
+#      CHARS.index(char)
+#    end
+#  end
   
-p string_to_integer('4321') #== 4321
-p string_to_integer('570') #== 570
+# p string_to_integer('4321') #== 4321
+# p string_to_integer('570') #== 570
 
+# # "reverse an array without using the built-in reverse method"
+
+# def reverse_array(array)
+#  result = []
+ 
+#  array.each do |element|
+#   result.unshift(element)
+#  end
+ 
+#  result
+# end
+
+# p reverse_array([1,2,3,4,5])
+
+# def reverse_string(string)
+ 
+#  reverse_array(string.chars).join
+ 
+# end
+
+# p reverse_string('Hello!')
+
+
+# # "select the element out of the array if its index is a fibonacci number"
+
+# def fibonacci?(number)
+#  first = 1
+#  second = 1
+#  loop do 
+#    break if second >= number
+#    first, second = second, first + second
+#  end
+ 
+#  number == second
+# end
+
+# def select_if_fib_index(array)
+#  array.select do |element|
+#   fibonacci?(array.index(element))
+#  end
+# end
+
+
+# #1,1,2,3,5,8,13,21
+# p fibonacci?(1)
+
+# p select_if_fib_index(%w(a b c d e f g h i j q l m n o p q r s t u v w x y z))
+
+# # "write a method to determine if a word is a palindrome, without using the reverse method"
+
+# def palindrome?(word)
+#  reverse_word = []
+ 
+#  word.each_char do |char|
+#   reverse_word.unshift(char)
+#  end
+ 
+#  reverse_word.join == word
+# end
+
+# p palindrome?('madam')
+# p palindrome?('sir')
+
+# def reverse(string)
+#  result = []
+ 
+#  string.chars.each do |char|
+#   result.unshift(char)
+#  end
+ 
+#  result.join
+# end
+
+
+# p reverse("Launch School") == "Launch School".reverse
+
+# require 'pry'
+
+# def fizzbuzz(first, second)
+# result = (first..second).map do |number|
+#             case 
+#             when number % 3 == 0 && number % 5 == 0
+#               "FizzBuzz"
+#             when number % 3 == 0
+#               "Fizz"
+#               when number % 5 == 0
+#                 "Buzz"
+#             else
+#               number
+#             end
+#             binding.pry
+#           end
+  
+#   result.join(', ')
+# end
+
+# p fizzbuzz(1, 15)
+
+def remove_vowels(array)
+  result = []
+  
+  array.each do |string|
+   result << string.delete('aeiou') 
+  end
+  
+  result
+end
+
+p remove_vowels(%w(hello my name is fernanda))
