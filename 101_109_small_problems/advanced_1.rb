@@ -400,41 +400,40 @@ def egyptian(rational)
   array= []
   
   loop do
-    if (number - (1 / denominator.to_f)).round(10) < 0
+    if (number - Rational(1, denominator)) < 0
       denominator += 1
       next
     end
-    number -= (1 / denominator.to_f)
+    number -= Rational(1, denominator)
     array << denominator
     
     denominator += 1
     
-    break if number.round(10) == 0
+    break if number == 0
   end
   
   array
 end
 
-# p egyptian(Rational(2, 1))    # -> [1, 2, 3, 6]
-# p egyptian(Rational(137, 60)) # -> [1, 2, 3, 4, 5]
-# p egyptian(Rational(3, 1))    # -> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 230, 57960]
+p egyptian(Rational(2, 1))    # -> [1, 2, 3, 6]
+p egyptian(Rational(137, 60)) # -> [1, 2, 3, 4, 5]
+p egyptian(Rational(3, 1))    # -> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 230, 57960]
 
 # takes an Array of numbers in the same format, and calculates the resulting Rational number. You will need to use the Rational class provided by Ruby.
 
 def unegyptian(egyptian)
   rat = 0 
-  p egyptian
   egyptian.each do |den|
-    p rat += Rational(1,den)
+    rat += Rational(1,den)
   end
   rat
 end
 
-p unegyptian(egyptian(Rational(1, 2))) #== Rational(1, 2)
-p unegyptian(egyptian(Rational(3, 4))) #== Rational(3, 4)
-p unegyptian(egyptian(Rational(39, 20))) #== Rational(39, 20)
-p unegyptian(egyptian(Rational(127, 130))) #== Rational(127, 130)
-p unegyptian(egyptian(Rational(5, 7))) #== Rational(5, 7)
-p unegyptian(egyptian(Rational(1, 1))) #== Rational(1, 1)
-p unegyptian(egyptian(Rational(2, 1))) #== Rational(2, 1)
-p unegyptian(egyptian(Rational(3, 1))) #== Rational(3, 1)
+# p unegyptian(egyptian(Rational(1, 2))) == Rational(1, 2)
+# p unegyptian(egyptian(Rational(3, 4))) == Rational(3, 4)
+# p unegyptian(egyptian(Rational(39, 20))) == Rational(39, 20)
+# p unegyptian(egyptian(Rational(127, 130))) == Rational(127, 130)
+# p unegyptian(egyptian(Rational(5, 7))) == Rational(5, 7)
+# p unegyptian(egyptian(Rational(1, 1))) == Rational(1, 1)
+# p unegyptian(egyptian(Rational(2, 1))) == Rational(2, 1)
+# p unegyptian(egyptian(Rational(3, 1))) == Rational(3, 1)
