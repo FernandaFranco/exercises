@@ -235,14 +235,162 @@
 
 # p fizzbuzz(1, 15)
 
-def remove_vowels(array)
-  result = []
+# def remove_vowels(array)
+#   result = []
   
-  array.each do |string|
-   result << string.delete('aeiou') 
-  end
+#   array.each do |string|
+#   result << string.delete('aeiou') 
+#   end
   
-  result
+#   result
+# end
+
+# p remove_vowels(%w(hello my name is fernanda))
+
+# def century(year)
+#   result = if year % 100 == 0
+#             (year / 100).to_s
+#           else
+#             ((year / 100) + 1).to_s
+#           end
+  
+#   result = case 
+#   when result[-2..-1] == '11', result[-2..-1] == '12', result[-2..-1] == '13'
+#     result + 'th'
+#   when result[-1] == '1'
+#     result + 'st'
+#   when result[-1] == '2'
+#     result + 'nd'
+#   when result[-1] == '3'
+#     result + 'rd'
+#   else
+#     result + 'th'
+#   end
+  
+#   result
+# end
+
+# p century(2000) == '20th'
+# p century(2001) == '21st'
+# p century(1965) == '20th'
+# p century(256) == '3rd'
+# p century(5) == '1st'
+# p century(10103) == '102nd'
+# p century(1052) == '11th'
+# p century(1127) == '12th'
+# p century(11201) == '113th'
+
+# puts "Enter a noun:"
+# noun = gets.chomp
+
+# puts "Enter a verb:"
+# verb = gets.chomp
+
+# puts "Enter an adverb:"
+# adverb = gets.chomp
+
+# puts "The #{noun} did #{verb} #{adverb} yesterday."
+
+# def time_of_day(integer)
+#   if integer >= 0
+#     if integer < 60
+#       hours = "00" 
+#       minutes = integer.to_s
+#     else
+#       hours = ((integer/60) % 24).to_s
+#       minutes = (integer % 60).to_s
+#     end
+#   else
+#     if integer.abs < 60
+#       hours = "23"
+#       minutes = (60 + integer).to_s
+#     else
+#       hours = (24 - ((integer.abs/60) % 24 + ((integer.abs % 60)/60.to_f).ceil)).to_s
+#       minutes = (60 - (integer.abs % 60)).to_s
+#     end
+#   end
+  
+#   format('%02d:%02d', hours, minutes)
+# end
+
+# p time_of_day(0) == "00:00"
+# p time_of_day(-3) == "23:57"
+# p time_of_day(35) == "00:35"
+# p time_of_day(-1437) == "00:03"
+# p time_of_day(3000) == "02:00"
+# p time_of_day(800) == "13:20"
+# p time_of_day(-4231) == "01:29"
+
+# def swapcase(string)
+#   result = ''
+  
+#   string.each_char do |char|
+#     if char == char.downcase
+#       result << char.upcase
+#     else
+#       result << char.downcase
+#     end
+#   end
+  
+#   result
+# end
+
+# p swapcase('CamelCase') == 'cAMELcASE'
+# p swapcase('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
+
+# def merge(array_1, array_2)
+#   merged_array = []
+  
+#   array_1.each do |value|
+#     merged_array << value unless merged_array.include?(value)
+#   end
+  
+#   array_2.each do |value|
+#     merged_array << value unless merged_array.include?(value)
+#   end
+  
+#   merged_array
+# end
+
+# p merge([1, 3, 5], [3, 6, 9]) == [1, 3, 5, 6, 9]
+
+# def digit_list(integer)
+#   result = []
+  
+#   integer.to_s.each_char do |char|
+#     result << char.to_i
+#   end
+  
+#   result
+# end
+
+# p digit_list(12345) == [1, 2, 3, 4, 5]
+# p digit_list(7) == [7]
+# p digit_list(375290) == [3, 7, 5, 2, 9, 0]
+# p digit_list(444) == [4, 4, 4]
+
+# def multisum(number)
+#   result = []
+  
+#   (1..number).each do |digit|
+#     if digit % 3 == 0 || digit % 5 == 0
+#       result << digit
+#     end
+#   end
+  
+#   result.reduce(:+)
+# end
+
+# p multisum(3) == 3
+# p multisum(5) == 8
+# p multisum(10) == 33
+# p multisum(1000) == 234168
+
+def palindromic_number?(number)
+  number.to_s.reverse == number.to_s
 end
 
-p remove_vowels(%w(hello my name is fernanda))
+p palindromic_number?(34543) == true
+p palindromic_number?(123210) == false
+p palindromic_number?(22) == true
+p palindromic_number?(5) == true
