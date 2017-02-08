@@ -88,19 +88,116 @@
 #   puts true
 # end
 
-class Student
-  def initialize(name, year)
-    @name = name
-    @year = year
+# class Student
+#   def initialize(name, year)
+#     @name = name
+#     @year = year
+#   end
+# end
+
+# class Graduate < Student
+#   def initialize(name, year, parking)
+#     super(name, year)
+#     @parking = parking
+#   end
+# end
+
+# class Undergraduate < Student
+# end
+
+# class CircularQueue
+#   def initialize(buffer_max_size)
+#     @buffer_max_size = buffer_max_size
+#     @buffer = []
+#   end
+
+#   def dequeue
+#     @buffer.shift
+#   end
+
+#   def enqueue(new_object)
+#     dequeue unless @buffer.size < @buffer_max_size
+#     @buffer << new_object
+#   end
+# end
+
+# queue = CircularQueue.new(3)
+# puts queue.dequeue == nil
+
+# queue.enqueue(1)
+# queue.enqueue(2)
+# puts queue.dequeue == 1
+
+# queue.enqueue(3)
+# queue.enqueue(4)
+# puts queue.dequeue == 2
+
+# queue.enqueue(5)
+# queue.enqueue(6)
+# queue.enqueue(7)
+# puts queue.dequeue == 5
+# puts queue.dequeue == 6
+# puts queue.dequeue == 7
+# puts queue.dequeue == nil
+
+# queue = CircularQueue.new(4)
+# puts queue.dequeue == nil
+
+# queue.enqueue(1)
+# queue.enqueue(2)
+# puts queue.dequeue == 1
+
+# queue.enqueue(3)
+# queue.enqueue(4)
+# puts queue.dequeue == 2
+
+# queue.enqueue(5)
+# queue.enqueue(6)
+# queue.enqueue(7)
+# puts queue.dequeue == 4
+# puts queue.dequeue == 5
+# puts queue.dequeue == 6
+# puts queue.dequeue == 7
+# puts queue.dequeue == nil
+
+class Minilang
+  def initialize(commands)
+    @commands = commands
+  end
+
+  def eval
   end
 end
 
-class Graduate < Student
-  def initialize(name, year, parking)
-    super(name, year)
-    @parking = parking
-  end
-end
+Minilang.new('PRINT').eval
+# 0
 
-class Undergraduate < Student
-end
+Minilang.new('5 PUSH 3 MULT PRINT').eval
+# 15
+
+Minilang.new('5 PRINT PUSH 3 PRINT ADD PRINT').eval
+# 5
+# 3
+# 8
+
+Minilang.new('5 PUSH 10 PRINT POP PRINT').eval
+# 10
+# 5
+
+Minilang.new('5 PUSH POP POP PRINT').eval
+# Empty stack!
+
+Minilang.new('3 PUSH PUSH 7 DIV MULT PRINT ').eval
+# 6
+
+Minilang.new('4 PUSH PUSH 7 MOD MULT PRINT ').eval
+# 12
+
+Minilang.new('-3 PUSH 5 XSUB PRINT').eval
+# Invalid token: XSUB
+
+Minilang.new('-3 PUSH 5 SUB PRINT').eval
+# 8
+
+Minilang.new('6 PUSH').eval
+# (nothing printed; no PRINT commands)
