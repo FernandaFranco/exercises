@@ -9,7 +9,7 @@ class Series
   def slices(number)
     raise ArgumentError if number > @string.size
 
-    array = @string.split('').map(&:to_i)
-    array.each_cons(number).to_a
+    slices = @string.chars.map(&:to_i)
+    slices.each_cons(number).to_a
   end
 end
