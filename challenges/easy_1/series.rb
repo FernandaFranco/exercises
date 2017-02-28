@@ -3,13 +3,11 @@
 
 class Series
   def initialize(string)
-    @string = string
+    @slices = string.chars.map(&:to_i)
   end
 
   def slices(number)
     raise ArgumentError if number > @string.size
-
-    slices = @string.chars.map(&:to_i)
-    slices.each_cons(number).to_a
+    @slices.each_cons(number).to_a
   end
 end
