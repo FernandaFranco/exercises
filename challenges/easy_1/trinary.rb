@@ -5,7 +5,7 @@ class Trinary
   end
 
   def to_decimal
-    return 0 if @string =~ /\D|[3-9]/
+    return 0 if @string =~ /[^0-2]/
     @trinary_digits.reverse
                    .map
                    .with_index { |digit, index| digit*(3**index) }
