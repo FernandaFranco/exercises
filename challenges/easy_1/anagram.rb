@@ -13,21 +13,19 @@ class Anagram
 
   attr_reader :word
 
-# with sort:
+  # with sort:
   # def anagram?(candidate)
   #   return false if candidate == word
 
   #   candidate.chars.sort == word.chars.sort
   # end
 
-# without sort:
+  # without sort:
   def anagram?(candidate)
     return false if candidate == word || candidate.size != word.size
 
-    word.squeeze.each_char do |char|
-      return false unless candidate.count(char) == word.count(char)
+    word.squeeze.chars.all? do |char|
+      candidate.count(char) == word.count(char)
     end
-
-    true
   end
 end
