@@ -1,15 +1,24 @@
 class Integer
-  DECIMALS = [""] + %w(I II III IV V VI VII VIII IX)
-  SSS = [""] + %w(X XX XXX XL L LX LXX LXXX XC)
+  GROUPS = [
+    %w(I V X),
+    %w(X L C),
+    %w(C D M),
+    %w(M)
+  ]
 
 
   def to_roman
     result = []
     self.to_s.chars.reverse.each_with_index do | char, index |
-      result.unshift DECIMALS[char.to_i] if index == 0
-      result.unshift SSS[char.to_i] if index == 1
+      digit = char.to_i
+      case
+      when digit < 4 then result << GROUPS[index][0] * digit
+      when digit == 4 then result << GROUPS[index][0] + GROUPS[index][1]
+      when digit < 9 then result << GROUPS[index][1] + GROUPS[index][0] * (digit-5)
+      when digit == 9 then result << GROUPS[index][0] + GROUPS[index][2]
+      end
     end
 
-    result.join
+    result.reverse.join
   end
 end
