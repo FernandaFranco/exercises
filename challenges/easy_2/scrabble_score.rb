@@ -16,20 +16,14 @@ class Scrabble
     return score if @word.nil?
     @word.chars.each do |char|
       char = char.upcase
-      if VALUE_1.include?(char)
-        score += 1
-      elsif VALUE_2.include?(char)
-        score += 2
-      elsif VALUE_3.include?(char)
-        score += 3
-      elsif VALUE_4.include?(char)
-        score += 4
-      elsif VALUE_5.include?(char)
-        score += 5
-      elsif VALUE_8.include?(char)
-        score += 8
-      elsif VALUE_10.include?(char)
-        score += 10
+      case
+      when VALUE_1.include?(char) then score += 1
+      when VALUE_2.include?(char)then score += 2
+      when VALUE_3.include?(char)then score += 3
+      when VALUE_4.include?(char)then score += 4
+      when VALUE_5.include?(char)then score += 5
+      when VALUE_8.include?(char)then score += 8
+      when VALUE_10.include?(char)then score += 10
       end
     end
     score
